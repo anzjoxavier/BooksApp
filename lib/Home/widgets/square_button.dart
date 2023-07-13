@@ -1,11 +1,15 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:booksapp/Constants/constants.dart';
 import 'package:flutter/material.dart';
-
+typedef TapFunction = void Function();
 // ignore: must_be_immutable
 class SquareButton extends StatelessWidget {
-  SquareButton({super.key,required this.buttonName,required this.buttonImgPath});
+  SquareButton(
+      {super.key, required this.buttonName, required this.buttonImgPath,required this.OnTap});
   String buttonName;
   String buttonImgPath;
+  TapFunction OnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class SquareButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap:OnTap,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Center(

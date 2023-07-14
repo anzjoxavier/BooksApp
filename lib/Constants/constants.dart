@@ -27,4 +27,8 @@ TextStyle mediumTextStyle = GoogleFonts.openSans(
       color: Colors.grey[800],
     fontSize: 16,
   fontWeight: FontWeight.w100);
+TextStyle searchBookIconTextStyle = GoogleFonts.openSans(
+    color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700);
 
+    TextStyle searchBookIconAuthorTextStyle = GoogleFonts.openSans(
+    color: Colors.grey[700], fontSize: 16, fontWeight: FontWeight.w500);

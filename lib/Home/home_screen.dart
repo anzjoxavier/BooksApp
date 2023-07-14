@@ -3,6 +3,7 @@
 import 'package:booksapp/Constants/constants.dart';
 import 'package:booksapp/Home/widgets/book_icon.dart';
 import 'package:booksapp/Home/widgets/book_slide.dart';
+import 'package:booksapp/Home/widgets/custom_search_delegate.dart';
 import 'package:booksapp/Home/widgets/square_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.w600))
                   ])),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showSearch(
+                            context: context,
+                            delegate: CustomSearchDelegateNew());
+                      },
                       icon: Icon(
                         CupertinoIcons.search,
                         size: 28,
@@ -150,22 +155,22 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 15,
             ),
             ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: GenresList.length,
-              itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  BookSlide(
-                    title: GenresList[index][0],
-                    searchWord: GenresList[index][1],
-                  ),
-              SizedBox(
-              height: 15,
-            ),
-                ],
-              );
-            })
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: GenresList.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      BookSlide(
+                        title: GenresList[index][0],
+                        searchWord: GenresList[index][1],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                })
           ],
         ),
       ),

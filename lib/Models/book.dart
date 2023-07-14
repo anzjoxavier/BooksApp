@@ -63,7 +63,7 @@ class BookModel {
       pageCount: map['volumeInfo']['pageCount'] != null
           ? (map['volumeInfo']['pageCount']).toDouble()
           : null,
-      imageLink: map['volumeInfo']['imageLinks']['smallThumbnail'] != null
+      imageLink: map['volumeInfo']['imageLinks'] != null
           ? map['volumeInfo']['imageLinks']['smallThumbnail'] as String
           : null,
       buyLink: map['saleInfo']['buyLink']!= null?map['saleInfo']['buyLink'] as String: null,

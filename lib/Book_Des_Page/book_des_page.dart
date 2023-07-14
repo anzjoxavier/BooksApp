@@ -1,4 +1,6 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print
+
+import 'dart:convert';
 
 import 'package:booksapp/Constants/constants.dart';
 import 'package:booksapp/Services/book.dart';
@@ -22,24 +24,34 @@ class BookDescriptionPage extends StatefulWidget {
 
 class _BookDescriptionPageState extends State<BookDescriptionPage> {
   IconData wishListIcon = CupertinoIcons.bookmark;
+  late final Box box;
   @override
   void initState() {
     // TODO: implement initState
-
+    box = Hive.box('WishBox');
+    // box.clear();
     super.initState();
+  }
+
+  addtoWishBox(BookModel book) async {
+    // Storing key-value pair
+    box.put(book.id, book);
+    print('Book added to box!');
+  }
+
+  deleteFromWishBox(BookModel book) {
+    box.delete(book.id);
+    print('Book deleted from box!');
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    Hive.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (MyHomePage.Wishlist.map((e) => e.title)
-        .contains(widget.bookModel.title)) {
+    if (box.get(widget.bookModel.id)!=null) {
       wishListIcon = CupertinoIcons.bookmark_fill;
     } else {
       wishListIcon = CupertinoIcons.bookmark;
@@ -225,10 +237,13 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                               if (wishListIcon == CupertinoIcons.bookmark) {
                                 // BookServices.addBook(widget.bookModel);
                                 MyHomePage.Wishlist.add(widget.bookModel);
+                                addtoWishBox(widget.bookModel);
                                 wishListIcon = CupertinoIcons.bookmark_fill;
                               } else {
-                                
-                                MyHomePage.Wishlist.remove(widget.bookModel);
+                                MyHomePage.Wishlist.removeWhere((e) {
+                                  return e.id == widget.bookModel.id;
+                                });
+                                deleteFromWishBox(widget.bookModel);
                                 wishListIcon = CupertinoIcons.bookmark;
                               }
                             });

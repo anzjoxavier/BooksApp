@@ -7,12 +7,16 @@ import 'Constants/constants.dart';
 import 'Models/book.dart';
 
 void main() async {
-  //   // Initialize hive
-  // await Hive.initFlutter();
-  // // Open the peopleBox
-  // await Hive.openBox('WishBox');
+
+   Hive.registerAdapter<BookModel>(BookModelAdapter());
+   await Hive.initFlutter();
+    await Hive.openBox('WishBox');
+    
+  
+
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,12 +40,19 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
   static List<BookModel> Wishlist = [];
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    // Hive.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

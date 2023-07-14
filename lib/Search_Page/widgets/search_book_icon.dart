@@ -13,8 +13,14 @@ class SearchBookIcon extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,MaterialPageRoute(
-                                  builder: (context) => BookDescriptionPage(bookModel: bookModel,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookDescriptionPage(
+                      bookModel: bookModel,
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    )));
       },
       child: SizedBox(
         height: 215,
@@ -22,7 +28,6 @@ class SearchBookIcon extends StatelessWidget {
         // decoration: BoxDecoration(color: Colors.amber),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,42 +51,43 @@ class SearchBookIcon extends StatelessWidget {
                         ),
                 ),
                 const SizedBox(
-              width: 20,
-            ),
+                  width: 20,
+                ),
                 SizedBox(
-                  height: 180,
-                width: 215,
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${bookModel.title}${bookModel.subtitle != null ? ':${bookModel.subtitle}' : ''}",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: searchBookIconTextStyle,
-                    ),
-                    const SizedBox(height: 5,),
-                    Text(
-              bookModel.authors != null ? '${bookModel.authors}' : '',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: searchBookIconAuthorTextStyle,
-            ),
-                    const SizedBox(height: 5,),
-                    Text(
-              bookModel.price != null ? '₹ ${bookModel.price}' : '',
-              overflow: TextOverflow.ellipsis,
-              style: searchBookIconAuthorTextStyle,
-            )
-                  
+                    height: 180,
+                    width: 215,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${bookModel.title}${bookModel.subtitle != null ? ':${bookModel.subtitle}' : ''}",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: searchBookIconTextStyle,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          bookModel.authors != null
+                              ? '${bookModel.authors}'
+                              : '',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: searchBookIconAuthorTextStyle,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          bookModel.price != null ? '₹ ${bookModel.price}' : '',
+                          overflow: TextOverflow.ellipsis,
+                          style: searchBookIconAuthorTextStyle,
+                        )
+                      ],
+                    )),
               ],
-                )),
-              ],
             ),
-            
-            
-            
           ],
         ),
       ),

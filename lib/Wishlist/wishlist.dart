@@ -1,4 +1,5 @@
 import 'package:booksapp/Models/book.dart';
+import 'package:booksapp/Wishlist/widgets/wish_list_icon.dart';
 import 'package:booksapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,13 +18,20 @@ class WishListPage extends StatefulWidget {
 class _WishListPageState extends State<WishListPage> {
   late final Box box;
   List list = [];
+  final _focusNode = FocusNode();
   @override
   void initState() {
-    // TODO: implement initState
-    // box = Hive.box('WishBox');
-    // // list = box.values.toList();
-
+    _focusNode.addListener(() {
+      setState(() {});
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -68,43 +76,41 @@ class _WishListPageState extends State<WishListPage> {
                         list = snapshot.data!.values.toList();
 
                         return Column(children: [
-                          if(list.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 30, right: 10),
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: 160 / 303,
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 3,
-                                      mainAxisSpacing: 3),
-                              itemCount: list.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                print(list[index]);
-                                return BookIcon(
-                                  bookModel: list[index],
-                                );
-                              },
+                          if (list.isNotEmpty)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 30, right: 10),
+                              child: GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio: 160 / 303,
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 3,
+                                        mainAxisSpacing: 3),
+                                itemCount: list.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  print(list[index]);
+                                  return WishListIcon(
+                                    bookModel: list[index],
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          if(list.isEmpty)
-                          SizedBox(
-                          height: MediaQuery.of(context).size.height - 100,
-                          child: Center(
-                            child: Text(
-                              "No Books in Wishlist",
-                              style: searchBookIconAuthorTextStyle,
-                            ),
-                          ),
-                        )
-
-
-
+                          if (list.isEmpty)
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height - 100,
+                              child: Center(
+                                child: Text(
+                                  "No Books in Wishlist",
+                                  style: searchBookIconAuthorTextStyle,
+                                ),
+                              ),
+                            )
                         ]);
                       } else {
-                      return  SizedBox(
+                        return SizedBox(
                           height: MediaQuery.of(context).size.height - 100,
                           child: Center(
                             child: Text(

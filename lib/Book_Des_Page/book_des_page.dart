@@ -13,10 +13,16 @@ import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Models/book.dart';
 
+typedef OnTAP = void Function();
+
 // ignore: must_be_immutable
 class BookDescriptionPage extends StatefulWidget {
-  BookDescriptionPage({super.key, required this.bookModel});
+  BookDescriptionPage(
+      {super.key,
+      required this.bookModel,
+     required  this.onTap });
   BookModel bookModel;
+  OnTAP onTap;
 
   @override
   State<BookDescriptionPage> createState() => _BookDescriptionPageState();
@@ -51,7 +57,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (box.get(widget.bookModel.id)!=null) {
+    if (box.get(widget.bookModel.id) != null) {
       wishListIcon = CupertinoIcons.bookmark_fill;
     } else {
       wishListIcon = CupertinoIcons.bookmark;
@@ -60,6 +66,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
+        leading: IconButton(onPressed: widget.onTap, icon: Icon(Icons.arrow_back)),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

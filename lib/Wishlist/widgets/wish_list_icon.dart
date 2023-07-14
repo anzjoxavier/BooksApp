@@ -1,11 +1,12 @@
 import 'package:booksapp/Book_Des_Page/book_des_page.dart';
 import 'package:booksapp/Constants/constants.dart';
 import 'package:booksapp/Models/book.dart';
+import 'package:booksapp/bottomNavigationBar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class BookIcon extends StatelessWidget {
-  BookIcon({super.key, required this.bookModel});
+class WishListIcon extends StatelessWidget {
+  WishListIcon({super.key, required this.bookModel});
   BookModel bookModel;
 
   @override
@@ -20,7 +21,10 @@ class BookIcon extends StatelessWidget {
                   builder: (context) => BookDescriptionPage(
                         bookModel: bookModel,
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavBar(selectedIndex: 2,)));
                         },
                       )));
         },

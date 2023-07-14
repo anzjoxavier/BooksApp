@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:booksapp/Models/book.dart';
 import 'package:flutter/material.dart';
 import '../../Services/book.dart';
+import '../Constants/constants.dart';
 import '../Home/widgets/book_icon.dart';
 
 class GenreDesPage extends StatelessWidget {
@@ -16,6 +17,14 @@ class GenreDesPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(title),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: primaryColor,
+            )),
       ),
       body: Padding(
         padding: const EdgeInsets.only(right: 12, left: 28),

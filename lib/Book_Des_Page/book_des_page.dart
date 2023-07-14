@@ -66,7 +66,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        leading: IconButton(onPressed: widget.onTap, icon: Icon(Icons.arrow_back)),
+        leading: IconButton(onPressed: widget.onTap, icon: Icon(Icons.arrow_back,color: primaryColor,)),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

@@ -1,16 +1,9 @@
-# booksapp
+#Book Store App
 
-A new Flutter project.
+A Book Store App made using Google Books API.
 
-## Getting Started
+## Screenshot Video of Book Store App
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+https://github.com/anzjoxavier/BooksApp/assets/116029351/93f8052b-f199-4b04-9b35-175070c1ee47
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

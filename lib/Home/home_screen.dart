@@ -5,11 +5,12 @@ import 'package:booksapp/Home/widgets/book_icon.dart';
 import 'package:booksapp/Home/widgets/book_slide.dart';
 import 'package:booksapp/Home/widgets/custom_search_delegate.dart';
 import 'package:booksapp/Home/widgets/square_button.dart';
+import 'package:booksapp/bottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Genre_Page/genre_page.dart';
+import '../Genre_Des_Page/genre_des_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -91,7 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   SquareButton(
                     buttonName: 'Genres',
                     buttonImgPath: 'assets/images/bookshelf.png',
-                    OnTap: () {},
+                    OnTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BottomNavBar(selectedIndex: 1,)));
+                    },
                   ),
                   SquareButton(
                     buttonName: 'Romance',
@@ -100,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GenrePage(
+                              builder: (context) => GenreDesPage(
                                     title: "Romance",
                                     searchWord: "Romance",
                                   )));
@@ -113,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GenrePage(
+                              builder: (context) => GenreDesPage(
                                     title: "Comics",
                                     searchWord: "Comics",
                                   )));
@@ -126,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GenrePage(
+                              builder: (context) => GenreDesPage(
                                     title: "Cooking",
                                     searchWord: "Cooking",
                                   )));
@@ -139,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GenrePage(
+                              builder: (context) => GenreDesPage(
                                     title: "Health",
                                     searchWord: "Health",
                                   )));

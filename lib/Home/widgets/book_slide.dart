@@ -4,12 +4,12 @@ import 'package:booksapp/Models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../Constants/constants.dart';
-import '../../Genre_Page/genre_page.dart';
+import '../../Genre_Des_Page/genre_des_page.dart';
 import '../../Services/book.dart';
 import 'book_icon.dart';
 
 class BookSlide extends StatefulWidget {
- BookSlide({super.key,required this.title,required this.searchWord});
+  BookSlide({super.key, required this.title, required this.searchWord});
   String title;
   String searchWord;
   @override
@@ -44,7 +44,7 @@ class _BookSlideState extends State<BookSlide> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => GenrePage(
+                    builder: (context) => GenreDesPage(
                           title: widget.title,
                           searchWord: widget.searchWord,
                         )));

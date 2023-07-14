@@ -32,3 +32,6 @@ TextStyle searchBookIconTextStyle = GoogleFonts.openSans(
 
     TextStyle searchBookIconAuthorTextStyle = GoogleFonts.openSans(
     color: Colors.grey[700], fontSize: 16, fontWeight: FontWeight.w500);
+
+    TextStyle genreListIconTextStyle = GoogleFonts.openSans(
+    color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500);

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import '../../Services/book.dart';
 import '../Home/widgets/book_icon.dart';
 
-class GenrePage extends StatelessWidget {
-  GenrePage({super.key, required this.title,required this.searchWord});
+class GenreDesPage extends StatelessWidget {
+  GenreDesPage({super.key, required this.title, required this.searchWord});
   String title;
   String searchWord;
   @override

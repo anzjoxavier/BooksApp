@@ -1,46 +1,73 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class BookModel {
-  String id;
-  String title;
-  String? subtitle;
-  String? authors;
-  String? publisher;
-  String? publishedDate;
-  String? description;
-  double? pageCount;
-  String? imageLink;
-  String? buyLink;
-  double? price;
-  BookModel({
-    required this.id,
-    required this.title,
-    this.subtitle,
-    this.authors,
-    this.publisher,
-    this.publishedDate,
-    this.description,
-    this.pageCount,
-    this.imageLink,
-    this.buyLink,
-    this.price
-  });
 
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'id': id,
-  //     'title': title,
-  //     'subtitle': subtitle,
-  //     'authors': authors,
-  //     'publisher': publisher,
-  //     'publishedDate': publishedDate,
-  //     'description': description,
-  //     'pageCount': pageCount,
-  //     'imageLink': imageLink,
-  //     'buyLink': buyLink,
-  //   };
-  // }
+import 'package:hive/hive.dart';
+
+part 'book.g.dart';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+@HiveType(typeId: 1)
+class BookModel {
+  @HiveField(0)
+  String id;
+
+  @HiveField(1)
+  String title;
+
+  @HiveField(2)
+  String? subtitle;
+
+  @HiveField(3)
+  String? authors;
+
+  @HiveField(4)
+  String? publisher;
+
+  @HiveField(5)
+  String? publishedDate;
+
+  @HiveField(6)
+  String? description;
+
+  @HiveField(7)
+  double? pageCount;
+
+  @HiveField(8)
+  String? imageLink;
+
+  @HiveField(9)
+  String? buyLink;
+
+  @HiveField(10)
+  double? price;
+
+  BookModel(
+      {required this.id,
+      required this.title,
+      this.subtitle,
+      this.authors,
+      this.publisher,
+      this.publishedDate,
+      this.description,
+      this.pageCount,
+      this.imageLink,
+      this.buyLink,
+      this.price});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'authors': authors,
+      'publisher': publisher,
+      'publishedDate': publishedDate,
+      'description': description,
+      'pageCount': pageCount,
+      'imageLink': imageLink,
+      'buyLink': buyLink,
+    };
+  }
 
   factory BookModel.fromMap(Map<String, dynamic> map) {
     return BookModel(
@@ -49,8 +76,9 @@ class BookModel {
       subtitle: map['volumeInfo']['subtitle'] != null
           ? map['volumeInfo']['subtitle'] as String
           : null,
-      authors:map['volumeInfo']['authors'] != null
-          ?  map['volumeInfo']['authors'].join(',') as String:null,
+      authors: map['volumeInfo']['authors'] != null
+          ? map['volumeInfo']['authors'].join(',') as String
+          : null,
       publisher: map['volumeInfo']['publisher'] != null
           ? map['volumeInfo']['publisher'] as String
           : null,
@@ -66,8 +94,9 @@ class BookModel {
       imageLink: map['volumeInfo']['imageLinks'] != null
           ? map['volumeInfo']['imageLinks']['smallThumbnail'] as String
           : null,
-      buyLink: map['saleInfo']['buyLink']!= null?map['saleInfo']['buyLink'] as String: null,
-
+      buyLink: map['saleInfo']['buyLink'] != null
+          ? map['saleInfo']['buyLink'] as String
+          : null,
       price: map['saleInfo']['retailPrice'] != null
           ? (map['saleInfo']['retailPrice']['amount']).toDouble()
           : null,

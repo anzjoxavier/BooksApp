@@ -1,9 +1,12 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:booksapp/Constants/constants.dart';
+import 'package:booksapp/Services/book.dart';
+import 'package:booksapp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 import '../Models/book.dart';
@@ -19,9 +22,29 @@ class BookDescriptionPage extends StatefulWidget {
 
 class _BookDescriptionPageState extends State<BookDescriptionPage> {
   IconData wishListIcon = CupertinoIcons.bookmark;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Hive.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (MyHomePage.Wishlist.map((e) => e.title)
+        .contains(widget.bookModel.title)) {
+      wishListIcon = CupertinoIcons.bookmark_fill;
+    } else {
+      wishListIcon = CupertinoIcons.bookmark;
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -153,7 +176,9 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                         children: [
                           Text(
                             widget.bookModel.pageCount != null
-                                ? (widget.bookModel.pageCount)!.toInt().toString()
+                                ? (widget.bookModel.pageCount)!
+                                    .toInt()
+                                    .toString()
                                 : "N.A",
                             style: GoogleFonts.openSans(
                                 fontSize: 32,
@@ -198,8 +223,12 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                           onPressed: () {
                             setState(() {
                               if (wishListIcon == CupertinoIcons.bookmark) {
+                                // BookServices.addBook(widget.bookModel);
+                                MyHomePage.Wishlist.add(widget.bookModel);
                                 wishListIcon = CupertinoIcons.bookmark_fill;
                               } else {
+                                
+                                MyHomePage.Wishlist.remove(widget.bookModel);
                                 wishListIcon = CupertinoIcons.bookmark;
                               }
                             });
@@ -214,9 +243,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                       width: 160,
                       height: 50,
                       child: ElevatedButton(
-                        
                         style: ElevatedButton.styleFrom(
-                        
                             backgroundColor: primaryColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -227,9 +254,9 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                           style: buyButtonTextStyle,
                         ),
                         onPressed: () {
-                          if(widget.bookModel.buyLink!=null)
-                          {
-                            _launchURL(widget.bookModel.buyLink!);}
+                          if (widget.bookModel.buyLink != null) {
+                            _launchURL(widget.bookModel.buyLink!);
+                          }
                         },
                       ),
                     )

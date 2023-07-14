@@ -2,7 +2,7 @@ import 'package:booksapp/Constants/constants.dart';
 import 'package:booksapp/Search_Page/search_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../Genre_Page/genre_page.dart';
+import '../../Genre_Des_Page/genre_des_page.dart';
 
 class CustomSearchDelegateNew extends SearchDelegate {
 

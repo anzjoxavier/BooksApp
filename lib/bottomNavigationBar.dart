@@ -1,12 +1,15 @@
 
 
+import 'package:booksapp/Genre_List_Page/genre_list_page.dart';
 import 'package:booksapp/Home/home_screen.dart';
+import 'package:booksapp/Wishlist/wishlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+   BottomNavBar({super.key, this.selectedIndex=0});
+  int selectedIndex = 0;  
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -23,22 +26,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
     super.dispose();
   }
 
-int _selectedIndex = 0; 
+
   List selectedbody = const [
     HomeScreen(),
-    Center(
-      child: Text("WishList"),
-    ),
+    GenreList(),
+    WishListPage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 28,
-    currentIndex: _selectedIndex, //New
+    currentIndex: widget.selectedIndex, //New
   onTap:(int index) {
   setState(() {
-    _selectedIndex = index;
+    widget.selectedIndex = index;
   });
 }, selectedFontSize: 14,
 elevation: 10,
@@ -50,12 +52,16 @@ elevation: 10,
         label: 'Home',
       ),
       BottomNavigationBarItem(
+        icon: Icon(Icons.list_alt_rounded),
+        label: 'Genres',
+      ),
+      BottomNavigationBarItem(
         icon: ImageIcon( AssetImage('assets/images/wishicon.png')),
         label: 'Wishlist',
       ),
   ],
 ),
-      body: selectedbody[_selectedIndex],
+      body: selectedbody[widget.selectedIndex],
     );
   }
 }

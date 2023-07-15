@@ -1,6 +1,6 @@
 #Book Store App
 
-A Book Store App made using Google Books API.
+A Book Store App made using Google Books API. Hive with TypeAdapter used for handling Storage for Wishlist.
 
 ## Screenshot Video of Book Store App
 
